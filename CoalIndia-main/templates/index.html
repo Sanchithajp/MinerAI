@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>MinerAI</title>
+</head>
+<body>
+    <header>
+        <h1>MinerAI</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to MinerAI Chatbot!</h2>
+        <p>Get answers to all your coal industry-related questions instantly.</p>
+        <iframe 
+            src="http://localhost:8501" 
+            width="1000" 
+            height="800" >
+        </iframe>
+    </section>
+
+    <section id="about">
+        <h2>About the Chatbot</h2>
+        <p>This chatbot is designed to provide information about coal mining, safety regulations, industry news, and more. Powered by AI for accurate responses.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="/submit" method="POST">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Your Email" required />
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Coal India. All rights reserved.</p>
+    </footer>
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();  // Prevent default form submission
+            
+            let formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                message: document.getElementById("message").value
+            };
+    
+            fetch("/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);  // Show alert message
+                document.getElementById("contactForm").reset();  // Clear form
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
