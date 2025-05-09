@@ -30,7 +30,7 @@ def speak_text(text):
     engine.runAndWait()
 def main():
     # Get Groq API key
-    groq_api_key = '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'
+    groq_api_key = ''
 
     # Set up Streamlit interface
     st.title("MinerAI!")
